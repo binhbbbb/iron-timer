@@ -1,6 +1,6 @@
 _[Demo and API Docs](http://collaborne.github.io/iron-timer)_
 
-iron-timer
+iron-timer [![Build Status](https://travis-ci.org/Collaborne/iron-timer.svg?branch=master)](https://travis-ci.org/Collaborne/iron-timer)
 =========
 
 A simple countdown timer (Polymer 1.x)
