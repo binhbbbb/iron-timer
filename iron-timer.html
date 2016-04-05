@@ -8,7 +8,7 @@ A simple countdown timer
 ### Example
 
 ```html
-<iron-timer start-time="00:00:05" current-time="{{currentTime}}"></iron-timer>
+<iron-timer start-time="10" current-time="{{currentTime}}"></iron-timer>
 ```
 
 @demo demo/index.html
@@ -22,44 +22,55 @@ A simple countdown timer
 
 	Polymer({
 		is: 'iron-timer',
+		/**
+		 * Fired when the timer reaches zero
+		 *
+		 * @event iron-timer-end
+		 */
 		properties: {
 			/**
-			 * Start time for the timer, in format HH:mm:ss
-			 * @default 00:00:00
+			 * Start time for the timer in seconds
+			 * @default 0
 			 */
 			startTime: {
-				type: String,
-				value: '00:00:00'
+				type: Number,
+				value: 0
 			},
 			/**
-			 * Current time of the timer, in format HH:mm:ss
+			 * Current time of the timer, in seconds
 			 */
 			currentTime: {
-				type: String,
+				type: Number,
 				notify: true
 			},
+			/**
+			 * True if the timer is currently running
+			 * @default false
+			 */
 			isRunning: {
 				type: Boolean,
 				value: false
 			},
-			_elapsed:{
+			/**
+			 * Time the timer has spent running since it was started
+			 */
+			_timeRunning: {
 				type: Number,
 				value: 0
-			},
-			_timer: Object
+			}
 		},
 		ready: function() {
-			this.set('currentTime', this.startTime);
+			this.set('currentTime', Math.floor(this.startTime));
 		},
 		/**
 		 * Starts the timer from the provided startTime
 		 */
 		start: function() {
-			if (!this.startTime) {
+			if (!this.startTime || this.isRunning) {
 				// TODO: what should happen when timer is started without startTime?
 				return;
 			}
-			this._timer = moment(this.currentTime, 'HH:mm:ss');
+			this._timeRunning = Math.floor(performance.now()/1000);
 			this.isRunning = true;
 
 			window.requestAnimationFrame(this._decreaseTimer.bind(this));
@@ -69,50 +80,29 @@ A simple countdown timer
 		 */
 		pause: function() {
 			this.isRunning = false;
-			this._elapsed = 0;
-		},
-		/**
-		 * Resumes the timer from where it has been paused
-		 */
-		resume: function() {
-			if (!this.startTime || this.isRunning) {
-				// TODO: what should happen when timer is started without startTime?
-				return;
-			}
-			// check if the timer has started at all, or it's over.
-			if (this.currentTime === '00:00:00' || this.currentTime === this.startTime) {
-				return;
-			}
-			this.isRunning = true;
-			window.requestAnimationFrame(this._decreaseTimer.bind(this));
 		},
 		/**
 		 * Resets the timer to the provided startTime
 		 */
 		reset: function() {
-			this.currentTime = this.startTime;
-			this._timer = moment(this.currentTime, 'HH:mm:ss');
-			this._elapsed = 0;
+			this.set('currentTime', Math.floor(this.startTime));
 		},
 		_decreaseTimer: function(timestamp) {
 			if (!this.isRunning) {
 				return;
 			}
-			if (this.currentTime === '00:00:00') {
+			if (this.currentTime === 0) {
 				// timer is over
 				this.pause();
 				this.fire('iron-timer-end');
 				return;
 			}
-			if (this._elapsed === 0) {
-				this._elapsed = timestamp;
-			}
-			progress = timestamp - this._elapsed;
+			var now = Math.floor(timestamp/1000);
+			// Compute the relative progress based on the time spent running
+			var progress = now - this._timeRunning;
+			this.currentTime = this.currentTime - progress;
+			this._timeRunning = now;
 
-			if (progress >= 1000) {
-				this.currentTime = this._timer.subtract(1, 's').format('HH:mm:ss');
-				this._elapsed = timestamp;
-			}
 			window.requestAnimationFrame(this._decreaseTimer.bind(this));
 		}
 	});
