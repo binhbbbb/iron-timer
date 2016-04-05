@@ -1,3 +1,4 @@
+<!doctype html>
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../moment-element/moment-import.html">
 
@@ -13,9 +14,6 @@ A simple countdown timer
 @demo demo/index.html
 -->
 <dom-module id="iron-timer">
-	<template>
-		[[currentTime]]
-	</template>
 </dom-module>
 
 <script>
@@ -27,6 +25,7 @@ A simple countdown timer
 		properties: {
 			/**
 			 * Start time for the timer, in format HH:mm:ss
+			 * @default 00:00:00
 			 */
 			startTime: {
 				type: String,
@@ -34,9 +33,11 @@ A simple countdown timer
 			},
 			/**
 			 * Current time of the timer, in format HH:mm:ss
-			 * @default 00:00:00
 			 */
-			currentTime: String,
+			currentTime: {
+				type: String,
+				notify: true
+			},
 			_isRunning: {
 				type: Boolean,
 				value: false
@@ -48,7 +49,7 @@ A simple countdown timer
 			_timer: Object
 		},
 		ready: function() {
-			this.currentTime = this.startTime;
+			this.set('currentTime', this.startTime);
 		},
 		/**
 		 * Starts the timer from the provided startTime

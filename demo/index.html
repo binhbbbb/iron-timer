@@ -1,3 +1,4 @@
+<!doctype html>
 <html>
 	<head>
 		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
@@ -7,7 +8,8 @@
 
 	<body>
 		<template is="dom-bind">
-			<iron-timer id="timer" start-time="00:00:05"></iron-timer> <br />
+			<iron-timer id="timer" start-time="00:00:05" current-time="{{currentTime}}"></iron-timer>
+			[[currentTime]]<br/>
 			<paper-button on-tap="start" raised>Start timer</paper-button><paper-button on-tap="pause" raised>Pause timer</paper-button>
 			<paper-button on-tap="resume" raised>Resume timer</paper-button><paper-button on-tap="reset" raised>Reset timer</paper-button>
 		</template>
