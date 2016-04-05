@@ -101,6 +101,7 @@ A simple countdown timer
 			if (this.currentTime === '00:00:00') {
 				// timer is over
 				this.pause();
+				this.fire('iron-timer-end');
 				return;
 			}
 			if (this._elapsed === 0) {
