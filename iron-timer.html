@@ -53,7 +53,7 @@ A simple countdown timer
 			/**
 			 * Time the timer has spent running since it was started
 			 */
-			_timeRunning: {
+			_elapsed: {
 				type: Number,
 				value: 0
 			}
@@ -69,7 +69,7 @@ A simple countdown timer
 				// TODO: what should happen when timer is started without startTime?
 				return;
 			}
-			this._timeRunning = Math.floor(performance.now()/1000);
+			this._elapsed = Math.floor(performance.now()/1000);
 			this.isRunning = true;
 
 			window.requestAnimationFrame(this._decreaseTimer.bind(this));
@@ -98,9 +98,9 @@ A simple countdown timer
 			}
 			var now = Math.floor(timestamp/1000);
 			// Compute the relative progress based on the time spent running
-			var progress = now - this._timeRunning;
+			var progress = now - this._elapsed;
 			this.currentTime = this.currentTime - progress;
-			this._timeRunning = now;
+			this._elapsed = now;
 
 			window.requestAnimationFrame(this._decreaseTimer.bind(this));
 		}
