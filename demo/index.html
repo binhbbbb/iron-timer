@@ -4,14 +4,14 @@
 		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 		<link rel="import" href="../../paper-button/paper-button.html">
 		<link rel="import" href="../iron-timer.html">
+		<title>Demo</title>
 	</head>
 
 	<body>
 		<template is="dom-bind">
-			<iron-timer id="timer" start-time="00:00:05" current-time="{{currentTime}}"></iron-timer>
+			<iron-timer id="timer" start-time="5" current-time="{{currentTime}}"></iron-timer>
 			[[currentTime]]<br/>
-			<paper-button on-tap="start" raised>Start timer</paper-button><paper-button on-tap="pause" raised>Pause timer</paper-button>
-			<paper-button on-tap="resume" raised>Resume timer</paper-button><paper-button on-tap="reset" raised>Reset timer</paper-button>
+			<paper-button on-tap="start" raised>Start/Resume timer</paper-button><paper-button on-tap="pause" raised>Pause timer</paper-button><paper-button on-tap="reset" raised>Reset timer</paper-button>
 		</template>
 
 		<script>
@@ -21,9 +21,6 @@
 			};
 			scope.pause = function() {
 				this.$.timer.pause();
-			};
-			scope.resume = function() {
-				this.$.timer.resume();
 			};
 			scope.reset = function() {
 				this.$.timer.reset();
