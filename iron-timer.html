@@ -7,7 +7,7 @@ A simple countdown timer
 ### Example
 
 ```html
-<iron-timer></iron-timer>
+<iron-timer start-time="00:00:05" current-time="{{currentTime}}"></iron-timer>
 ```
 
 @demo demo/index.html
@@ -41,7 +41,7 @@ A simple countdown timer
 				type: Boolean,
 				value: false
 			},
-			_start:{
+			_elapsed:{
 				type: Number,
 				value: 0
 			},
@@ -62,7 +62,7 @@ A simple countdown timer
 		},
 		pause: function() {
 			this._isRunning = false;
-			this._start = 0;
+			this._elapsed = 0;
 		},
 		resume: function() {
 			if (!this.startTime) {
@@ -79,7 +79,7 @@ A simple countdown timer
 		reset: function() {
 			this.currentTime = this.startTime;
 			this._timer = moment(this.currentTime, 'HH:mm:ss');
-			this._start = 0;
+			this._elapsed = 0;
 		},
 		_decreaseTimer: function(timestamp) {
 			if (!this._isRunning) {
@@ -90,14 +90,14 @@ A simple countdown timer
 				this.pause();
 				return;
 			}
-			if (this._start === 0) {
-				this._start = timestamp;
+			if (this._elapsed === 0) {
+				this._elapsed = timestamp;
 			}
-			progress = timestamp - this._start;
+			progress = timestamp - this._elapsed;
 
 			if (progress >= 1000) {
 				this.currentTime = this._timer.subtract(1, 's').format('HH:mm:ss');
-				this._start = timestamp;
+				this._elapsed = timestamp;
 			}
 			window.requestAnimationFrame(this._decreaseTimer.bind(this));
 		}
