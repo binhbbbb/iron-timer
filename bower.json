@@ -11,7 +11,7 @@
     "iron",
 	"timer"
   ],
-  "license": "Apache 2",
+  "license": "Apache-2.0",
   "homepage": "https://github.com/collaborne/iron-timer",
   "ignore": [
     "**/.*"
