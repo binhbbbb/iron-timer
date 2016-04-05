@@ -47,14 +47,15 @@ A simple countdown timer
 			},
 			_timer: Object
 		},
+		ready: function() {
+			this.currentTime = this.startTime;
+		},
 		start: function() {
 			if (!this.startTime) {
 				// TODO: what should happen when timer is started without startTime?
 				return;
 			}
-			this.currentTime = this.startTime;
 			this._timer = moment(this.currentTime, 'HH:mm:ss');
-			this._elapsed = 0;
 			this._isRunning = true;
 
 			window.requestAnimationFrame(this._decreaseTimer.bind(this));
@@ -65,7 +66,11 @@ A simple countdown timer
 		},
 		resume: function() {
 			if (!this.startTime) {
-				// TODO: here we should check if the timer has ever started at all. Cannot invoke 'resume' on a un-started timer
+				// TODO: what should happen when timer is started without startTime?
+				return;
+			}
+			// check if the timer has started at all, or it's over.
+			if (this.currentTime === '00:00:00' || this.currentTime === this.startTime) {
 				return;
 			}
 			this._isRunning = true;
@@ -73,10 +78,16 @@ A simple countdown timer
 		},
 		reset: function() {
 			this.currentTime = this.startTime;
+			this._timer = moment(this.currentTime, 'HH:mm:ss');
 			this._start = 0;
 		},
 		_decreaseTimer: function(timestamp) {
 			if (!this._isRunning) {
+				return;
+			}
+			if (this.currentTime === '00:00:00') {
+				// timer is over
+				this.pause();
 				return;
 			}
 			if (this._start === 0) {
