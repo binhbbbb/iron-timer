@@ -17,8 +17,7 @@
     "**/.*"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.0.0",
-	"moment-element": "Collaborne/moment-element#fix/min-ref"
+    "polymer": "Polymer/polymer#^1.0.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
