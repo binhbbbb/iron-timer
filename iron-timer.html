@@ -28,15 +28,15 @@ A simple countdown timer
 			/**
 			 * Start time for the timer, in format HH:mm:ss
 			 */
-			startTime: String,
+			startTime: {
+				type: String,
+				value: '00:00:00'
+			},
 			/**
 			 * Current time of the timer, in format HH:mm:ss
 			 * @default 00:00:00
 			 */
-			currentTime: {
-				type: String,
-				value: '00:00:00'
-			},
+			currentTime: String,
 			_isRunning: {
 				type: Boolean,
 				value: false
@@ -50,6 +50,9 @@ A simple countdown timer
 		ready: function() {
 			this.currentTime = this.startTime;
 		},
+		/**
+		 * Starts the timer from the provided startTime
+		 */
 		start: function() {
 			if (!this.startTime) {
 				// TODO: what should happen when timer is started without startTime?
@@ -60,10 +63,16 @@ A simple countdown timer
 
 			window.requestAnimationFrame(this._decreaseTimer.bind(this));
 		},
+		/**
+		 * Pauses the timer
+		 */
 		pause: function() {
 			this._isRunning = false;
 			this._elapsed = 0;
 		},
+		/**
+		 * Resumes the timer from where it has been paused
+		 */
 		resume: function() {
 			if (!this.startTime) {
 				// TODO: what should happen when timer is started without startTime?
@@ -76,6 +85,9 @@ A simple countdown timer
 			this._isRunning = true;
 			window.requestAnimationFrame(this._decreaseTimer.bind(this));
 		},
+		/**
+		 * Resets the timer to the provided startTime
+		 */
 		reset: function() {
 			this.currentTime = this.startTime;
 			this._timer = moment(this.currentTime, 'HH:mm:ss');
