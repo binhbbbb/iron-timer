@@ -1,0 +1,97 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../moment-element/moment-import.html">
+
+<!--
+A simple countdown timer
+
+### Example
+
+```html
+<iron-timer></iron-timer>
+```
+
+@demo demo/index.html
+-->
+<dom-module id="iron-timer">
+	<template>
+		[[currentTime]]
+	</template>
+</dom-module>
+
+<script>
+
+(function() {
+
+	Polymer({
+		is: 'iron-timer',
+		properties: {
+			/**
+			 * Start time for the timer, in format HH:mm:ss
+			 */
+			startTime: String,
+			/**
+			 * Current time of the timer, in format HH:mm:ss
+			 * @default 00:00:00
+			 */
+			currentTime: {
+				type: String,
+				value: '00:00:00'
+			},
+			_isRunning: {
+				type: Boolean,
+				value: false
+			},
+			_start:{
+				type: Number,
+				value: 0
+			},
+			_timer: Object
+		},
+		start: function() {
+			if (!this.startTime) {
+				// TODO: what should happen when timer is started without startTime?
+				return;
+			}
+			this.currentTime = this.startTime;
+			this._timer = moment(this.currentTime, 'HH:mm:ss');
+			this._elapsed = 0;
+			this._isRunning = true;
+
+			window.requestAnimationFrame(this._decreaseTimer.bind(this));
+		},
+		pause: function() {
+			this._isRunning = false;
+			this._start = 0;
+		},
+		resume: function() {
+			if (!this.startTime) {
+				// TODO: here we should check if the timer has ever started at all. Cannot invoke 'resume' on a un-started timer
+				return;
+			}
+			this._isRunning = true;
+			window.requestAnimationFrame(this._decreaseTimer.bind(this));
+		},
+		reset: function() {
+			this.currentTime = this.startTime;
+			this._start = 0;
+		},
+		_decreaseTimer: function(timestamp) {
+			if (!this._isRunning) {
+				return;
+			}
+			if (this._start === 0) {
+				this._start = timestamp;
+			}
+			progress = timestamp - this._start;
+
+			if (progress >= 1000) {
+				this.currentTime = this._timer.subtract(1, 's').format('HH:mm:ss');
+				this._start = timestamp;
+			}
+			window.requestAnimationFrame(this._decreaseTimer.bind(this));
+		}
+	});
+
+})();
+
+</script>
