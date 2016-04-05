@@ -60,7 +60,7 @@ A simple countdown timer
 			}
 		},
 		ready: function() {
-			this.set('currentTime', Math.floor(this.startTime));
+			this.set('currentTime', this.startTime);
 		},
 		/**
 		 * Starts the timer from the provided startTime
@@ -85,7 +85,7 @@ A simple countdown timer
 		 * Resets the timer to the provided startTime
 		 */
 		reset: function() {
-			this.set('currentTime', Math.floor(this.startTime));
+			this.set('currentTime', this.startTime);
 		},
 		_decreaseTimer: function(timestamp) {
 			if (!this.isRunning) {
