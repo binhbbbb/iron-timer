@@ -38,7 +38,7 @@ A simple countdown timer
 				type: String,
 				notify: true
 			},
-			_isRunning: {
+			isRunning: {
 				type: Boolean,
 				value: false
 			},
@@ -60,7 +60,7 @@ A simple countdown timer
 				return;
 			}
 			this._timer = moment(this.currentTime, 'HH:mm:ss');
-			this._isRunning = true;
+			this.isRunning = true;
 
 			window.requestAnimationFrame(this._decreaseTimer.bind(this));
 		},
@@ -68,14 +68,14 @@ A simple countdown timer
 		 * Pauses the timer
 		 */
 		pause: function() {
-			this._isRunning = false;
+			this.isRunning = false;
 			this._elapsed = 0;
 		},
 		/**
 		 * Resumes the timer from where it has been paused
 		 */
 		resume: function() {
-			if (!this.startTime || this._isRunning) {
+			if (!this.startTime || this.isRunning) {
 				// TODO: what should happen when timer is started without startTime?
 				return;
 			}
@@ -83,7 +83,7 @@ A simple countdown timer
 			if (this.currentTime === '00:00:00' || this.currentTime === this.startTime) {
 				return;
 			}
-			this._isRunning = true;
+			this.isRunning = true;
 			window.requestAnimationFrame(this._decreaseTimer.bind(this));
 		},
 		/**
@@ -95,7 +95,7 @@ A simple countdown timer
 			this._elapsed = 0;
 		},
 		_decreaseTimer: function(timestamp) {
-			if (!this._isRunning) {
+			if (!this.isRunning) {
 				return;
 			}
 			if (this.currentTime === '00:00:00') {
