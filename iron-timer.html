@@ -83,10 +83,18 @@ A simple countdown timer
 			this.isRunning = false;
 		},
 		/**
+		 * Returns true if the timer has been started, i.e. if it's not its original value
+		 * Note: this is independed from whether the timer is currently running or paused
+		 */
+		isStarted: function() {
+			return Boolean(this._elapsed);
+		},
+		/**
 		 * Resets the timer to the provided startTime
 		 */
 		reset: function() {
 			this.set('currentTime', this.startTime);
+			this.set('_elapsed', 0);
 		},
 		_decreaseTimer: function(timestamp) {
 			if (!this.isRunning) {
