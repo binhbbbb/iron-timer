@@ -9,12 +9,11 @@ cache:
   - node_modules
 before_script:
 - npm install web-component-tester bower polylint
-- bower install
-- polylint
-- export PATH=$PWD/node_modules/.bin:$PATH
+- $(npm bin)/bower install
+- $(npm bin)/polylint
 script:
-- xvfb-run wct
+- xvfb-run $(npm bin)/wct
 after_success: ! '[ ${TRAVIS_PULL_REQUEST} = "false" ] && [ ${TRAVIS_BRANCH} = "master"
-  ] && bower install -s https://${GH_TOKEN}@github.com/Collaborne/collaborne-build-tools.git && bower_components/collaborne-build-tools/gpages_build.sh Collaborne info@collaborne.com'
+  ] && $(npm bin)/bower install -s https://${GH_TOKEN}@github.com/Collaborne/collaborne-build-tools.git && bower_components/collaborne-build-tools/gpages_build.sh Collaborne info@collaborne.com'
 env:
   secure: ZgTlfuCMa0y8WGNovFQx5MqF4y39OY2p21m8AzJjmhWYdAYihvm+Hn+NoPA2Am6Hvbsi/V67A2b3sdOmD+oYVnX58wnhaPDw8arMWjWc3UpZKI2XNpw78fgwO3THah2DaE1qsS8AAaqDRbiPQo9Axu3L2bLzpbhOsVoxvWQWeytnZg0BzT8yXaM2Nm3GCiRYhzfYQnrO3QTtQgHG/OqV1sWKuowThbFT3ZwvSETyJznhBIYMVHLLZL1Xfpyv0xfXClb3li2eUcazFoJERQacCgo/OL0gaobf571vrm7wXpLYMhohEIGDZplY/z7ZrJerI+Z5lnsDqHTw+dj9G/xCs7ndg+HlMYQN2soqHuHhR8SaltQTPFRWVvM93FhgjE/5Tu302UP9e/ESEde0OZfPSvxDDFmBTSZp/vMFtzmUKtCLO6TekZPwBpk9cixdDBMgAq8UjRiFNsWkdQZy4hV73k9GZcrd8WM7PlgdPwFOQl3hOufks3ID62c4677lKB5U/QpFypp5ae2wD7x0diZcNvAPfOxhTqSa+58fCaLsG2K+A5gv9D2DPGVkQS+AVURQmobrVyvNNxCcRAJe+iCJBBZcHCg5akOlY12E14lNY7FGtbBTYAQrrdbLcmt8r8ZwcI+y3EoE/olWGDeSTH68SVhOkKp1WMdYS23QTvtZPsE=
