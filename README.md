@@ -22,6 +22,7 @@ A simple countdown timer (Polymer)
     start-time="5"
     current-time="{{currentTime}}">
 </iron-timer>
+[[currentTime]]
 ```
 
 
