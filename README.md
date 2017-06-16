@@ -1,13 +1,29 @@
-_[Demo and API Docs](http://collaborne.github.io/iron-timer)_
-
-iron-timer [![Build Status](https://travis-ci.org/Collaborne/iron-timer.svg?branch=master)](https://travis-ci.org/Collaborne/iron-timer)
+iron-timer [![Build Status](https://travis-ci.org/Collaborne/iron-timer.svg?branch=master)](https://travis-ci.org/Collaborne/iron-timer) [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/Collaborne/iron-timer)
 =========
 
-A simple countdown timer (Polymer 1.x)
+A simple countdown timer (Polymer)
 
 ## Install
 
 `bower install iron-timer`
+
+<!--
+```
+<custom-element-demo>
+  <template>
+    <link rel="import" href="iron-timer.html">
+    <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
+```html
+<iron-timer
+    start-time="5"
+    current-time="{{currentTime}}">
+</iron-timer>
+```
+
 
 ## License
 
