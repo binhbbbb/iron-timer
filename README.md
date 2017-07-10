@@ -3,6 +3,8 @@ iron-timer [![Build Status](https://travis-ci.org/Collaborne/iron-timer.svg?bran
 
 A simple countdown timer (Polymer)
 
+This element uses Polymer 2 native classes (ES6 syntax). If you require Polymer hybrid mode: use release 2.0.x of this element.
+
 ## Install
 
 `bower install iron-timer`
