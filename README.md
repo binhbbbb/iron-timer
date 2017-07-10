@@ -12,7 +12,11 @@ A simple countdown timer (Polymer)
 <custom-element-demo>
   <template>
     <link rel="import" href="iron-timer.html">
-    <next-code-block></next-code-block>
+    <dom-bind>
+      <template is="dom-bind">
+        <next-code-block></next-code-block>
+      </template>
+    </dom-bind>
   </template>
 </custom-element-demo>
 ```
