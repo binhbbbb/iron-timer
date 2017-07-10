@@ -15,16 +15,10 @@
 				<paper-button on-tap="start" raised>Start/Resume timer</paper-button><paper-button on-tap="pause" raised>Pause timer</paper-button><paper-button on-tap="reset" raised>Reset timer</paper-button>
 
 				<script>
-					var scope = document.querySelector('dom-bind');
-					scope.start = function() {
-						this.$.timer.start();
-					};
-					scope.pause = function() {
-						this.$.timer.pause();
-					};
-					scope.reset = function() {
-						this.$.timer.reset();
-					};
+					const scope = document.querySelector('dom-bind');
+					scope.start = () => scope.$.timer.start();
+					scope.pause = () => scope.$.timer.pause();
+					scope.reset = () => scope.$.timer.reset();
 				</script>
 			</template>
 		</dom-bind>
