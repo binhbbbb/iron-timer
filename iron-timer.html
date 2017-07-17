@@ -100,7 +100,7 @@ A simple countdown timer
 			if (!this.isRunning) {
 				return;
 			}
-			if (this.currentTime === 0) {
+			if (this.currentTime <= 0) {
 				// timer is over
 				this.pause();
 				this.fire('iron-timer-end');
