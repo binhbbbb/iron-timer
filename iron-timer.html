@@ -114,7 +114,10 @@ A simple countdown timer
 				if (this.currentTime <= 0) {
 					// timer is over
 					this.pause();
-					this.fire('iron-timer-end');
+					this.dispatchEvent(new CustomEvent('iron-timer-end', {
+						bubbles: true,
+						composed: true,
+					}));
 					return;
 				}
 				var now = Math.floor(timestamp/1000);
