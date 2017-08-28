@@ -7,7 +7,7 @@ This element uses Polymer 2 native classes (ES6 syntax). If you require Polymer 
 
 ## Install
 
-`bower install iron-timer`
+`bower install --save Collaborne/iron-timer`
 
 <!--
 ```
