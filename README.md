@@ -1,4 +1,6 @@
-iron-timer [![Build Status](https://travis-ci.org/Collaborne/iron-timer.svg?branch=master)](https://travis-ci.org/Collaborne/iron-timer) [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/Collaborne/iron-timer)
+iron-timer [![Build Status](https://travis-ci.org/Collaborne/iron-timer.svg?branch=master)](https://travis-ci.org/Collaborne/iron-timer) [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/Collaborne/iron-timer)  
+[![Published on Vaadin  Directory](https://img.shields.io/badge/Vaadin%20Directory-published-00b4f0.svg)](https://vaadin.com/directory/component/Collaborneiron-timer)
+[![Stars on vaadin.com/directory](https://img.shields.io/vaadin-directory/star/Collaborneiron-timer.svg)](https://vaadin.com/directory/component/Collaborneiron-timer)
 =========
 
 A simple countdown timer (Polymer)
